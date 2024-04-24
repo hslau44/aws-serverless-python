@@ -27,7 +27,7 @@ def hello(event, context):
         'headers': {
             'Content-Type': 'text/plain'
         },
-        'body': get_hello()
+        'body': _get_hello()
     }
 
 
