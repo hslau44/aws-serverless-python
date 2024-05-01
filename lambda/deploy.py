@@ -33,10 +33,28 @@ def hello(event, context):
 
 def calculate(event, context):
     res = None
-    if not event.get('name'):
-        logger.error("Params does not have 'name'")
+
+    if event.get('queryStringParameters'):
+        params = event['queryStringParameters']
+
+        if params.get('name'):
+            name = params['name']
+            length = _calculate_length(name=name)
+            res = f"Your name length is: {length}"
+        else:
+            logger.error("Cannot get key 'name'")
+
+    else:
+        logger.error("Cannot get parameters")
+
+    body = {'res': res}
     
-    name = event['name']
-    length = _calculate_length(name=name)
-    response = {'result': f'length of your name:  {length}'}
+    response = {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": json.dumps(body)
+    }
+
     return response

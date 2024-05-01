@@ -17,7 +17,7 @@ class AwsServerlessPythonStack(Stack):
             "AwsServerlessPythonFunction",
             runtime = _lambda.Runtime.PYTHON_3_8, # Choose any supported Node.js runtime
             code = _lambda.Code.from_asset("lambda"), # Points to the lambda directory
-            handler = "deploy.hello", # Points to the 'hello' file in the lambda directory
+            handler = "deploy.calculate", # Points to the 'hello' file in the lambda directory
         )
 
         # Define the API Gateway resource
